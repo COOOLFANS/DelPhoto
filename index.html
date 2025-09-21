@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DelPhoto Tinder 风格演示</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>DelPhoto 演示版</h1>
+      <p>拖动图片，像 Tinder 一样完成删除、保留或收藏操作。</p>
+    </header>
+    <main class="app-layout">
+      <section class="board">
+        <div class="round-status">
+          <div>当前轮次：<span id="round-number">1</span></div>
+          <div>本轮剩余：<span id="remaining-in-round">0</span> / 20</div>
+        </div>
+        <div class="card-stack" id="card-stack" aria-live="polite"></div>
+        <div class="instructions">
+          <h2>操作说明</h2>
+          <ul>
+            <li>左拖（或左划） ➜ <strong>删除</strong></li>
+            <li>右拖（或右划） ➜ <strong>保留</strong></li>
+            <li>下拖（或下划） ➜ <strong>收藏到收藏夹</strong></li>
+          </ul>
+          <p>每轮会随机加载 20 张照片，处理完自动进入下一轮。</p>
+        </div>
+      </section>
+      <aside class="sidebar">
+        <div class="stats">
+          <h2>操作统计</h2>
+          <p>已删除：<span id="deleted-count">0</span></p>
+          <p>已保留：<span id="kept-count">0</span></p>
+          <p>已收藏：<span id="favorite-count">0</span></p>
+        </div>
+        <div class="action-log">
+          <h2>操作历史</h2>
+          <ul id="action-log-list"></ul>
+        </div>
+        <div class="favorites">
+          <h2>收藏夹</h2>
+          <p class="favorites-empty" id="favorites-empty">还没有收藏的照片。</p>
+          <div class="favorite-grid" id="favorite-grid"></div>
+        </div>
+      </aside>
+    </main>
+
+    <template id="photo-card-template">
+      <div class="photo-card" role="group" aria-label="照片卡片">
+        <img alt="动物照片" draggable="false" />
+        <div class="action-indicator" aria-hidden="true"></div>
+      </div>
+    </template>
+
+    <div class="overlay" id="overlay" hidden>
+      <div class="overlay-content">
+        <h2 id="overlay-title">本轮完成！</h2>
+        <p id="overlay-message"></p>
+        <button id="overlay-button">开始下一轮</button>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
